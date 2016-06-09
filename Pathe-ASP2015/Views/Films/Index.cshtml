@@ -1,0 +1,35 @@
+﻿@using PatheAsp.Models
+@model PatheAsp.Models.Film
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Model.Naam</h2>
+<ul>
+    <li>
+        Beschrijving: @Model.Beschrijving
+    </li>
+    <li>
+        Duur: @Model.Duur minuten
+    </li>
+    <li>
+        Acteurs:
+    </li>
+    <ul>
+        @foreach (Acteur a in Model.Acteurs)
+        {
+            <li>
+                @a.Naam
+            </li>
+        }
+    </ul>
+    <li>
+        Regisseur: @Model.Regisseur.Naam
+    </li>
+    <li>
+    
+    </li>
+</ul>
+
+

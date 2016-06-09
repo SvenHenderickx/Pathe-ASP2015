@@ -1,0 +1,16 @@
+﻿@using Pathe_ASP2015.Models
+@model PatheAsp.Models.Bioscoop
+
+@{
+    ViewBag.Title = "BioscoopInfo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Model.Naam</h2>
+<p>Algemene Informatie: </p>
+<ul>
+    <li>Adres: @Model.Adres</li>
+    <li>Lift: @Handler.GetStringFromBool(Model.Lift)</li>
+    <li>Rolstoelmogelijkheid: @Handler.GetStringFromBool(Model.RolstoelMogelijkheid)</li>
+    <li>Ringleiding: @Handler.GetStringFromBool(Model.Ringleiding)</li>
+</ul>

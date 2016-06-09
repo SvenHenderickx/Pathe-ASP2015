@@ -1,0 +1,17 @@
+﻿@using PatheAsp.Models
+@using Pathe_ASP2015.Models
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@foreach (Bioscoop b in Model)
+{
+    <H3>@b.Naam</H3>
+    <ul>
+        <li>Plaats: @b.Plaats</li>
+        <li>@Html.ActionLink("Meer Informatie", @b.Naam, "Bioscopen/BioscoopInfo")</li>
+    </ul>
+}
+
