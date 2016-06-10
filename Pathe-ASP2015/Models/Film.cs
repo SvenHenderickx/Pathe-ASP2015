@@ -55,5 +55,15 @@ namespace PatheAsp.Models
         {
             return Duur / 60;
         }
+
+        public void ActeurenToevoegen(List<Acteur> acteurs)
+        {
+            this.Acteurs = acteurs;
+        }
+
+        public void RegisseurToevoegen(Regisseur regisseur)
+        {
+            this.Regisseur = regisseur;
+        }
     }
 }

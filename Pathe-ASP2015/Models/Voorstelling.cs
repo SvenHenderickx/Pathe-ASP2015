@@ -21,12 +21,12 @@ namespace PatheAsp.Models
             this.Film = film;
         }
 
-        public Voorstelling(int id, DateTime tijdEnDatum, string formaat, Film film)
+        public Voorstelling(int id, DateTime tijdEnDatum, string formaat, int filmId)
         {
             this.Id = id;
             this.TijdEnDatum = tijdEnDatum;
             this.Formaat = formaat;
-            this.Film = film;
+            this.FilmId = filmId;
             this.Tickets = new List<Ticket>();
         }
 

@@ -26,5 +26,23 @@ namespace Pathe_ASP2015.Controllers
             List<Film> films = Handler.GetAllFilms();
             return View();
         }
+
+        [Route("Films/FilmInfo/{filmNaam}")]
+        public ActionResult FilmInfo(string id)
+        {
+            Film tempFilm = null;
+            foreach (Film b in Handler.GetAllFilms())
+            {
+                if (b.Naam == id)
+                {
+                    tempFilm = b;
+                }
+            }
+            if (tempFilm != null)
+            {
+                return View(tempFilm);
+            }
+            return HttpNotFound();
+        }
     }
 }

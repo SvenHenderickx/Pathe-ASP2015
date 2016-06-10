@@ -13,6 +13,7 @@
     <p>@f.Beschrijving</p>
     <p>Aantal Minuten: @f.Duur</p>
     <p>Datum uitgekomen: @f.ReleaseDate.Day - @f.ReleaseDate.Month - @f.ReleaseDate.Year</p>
+    <p>@Html.ActionLink("Meer Informatie", @f.Naam, "Films/FilmInfo")</p>
 }
 
 

@@ -1,0 +1,19 @@
+﻿@using PatheAsp.Models
+@model PatheAsp.Models.Film
+@{
+    ViewBag.Title = "FilmInfo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Model.Naam</h2>
+<p>@Model.Beschrijving</p>
+<p>Aantal Minuten: @Model.Duur</p>
+<p>@Model.Taalversie</p>
+<p>Releasedatum: @Model.ReleaseDate.Day-@Model.ReleaseDate.Month-@Model.ReleaseDate.Year</p>
+<ul>
+    @foreach (Acteur a in Model.Acteurs)
+    {
+        <li>@Html.ActionLink(@a.Naam, @a.Naam, "Acteurs/ActeurInfo")</li>
+    }
+</ul>
+
