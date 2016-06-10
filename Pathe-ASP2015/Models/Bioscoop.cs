@@ -67,5 +67,18 @@ namespace PatheAsp.Models
             }
             return tempList;
         }
+
+        public List<Voorstelling> GetAlleVoorstellingen()
+        {
+            List<Voorstelling> voorstellingen = new List<Voorstelling>();
+            foreach (Zaal z in Zalen)
+            {
+                foreach (Voorstelling v in z.Voorstellingen)
+                {
+                    voorstellingen.Add(v);
+                }
+            }
+            return voorstellingen;
+        }
     }
 }

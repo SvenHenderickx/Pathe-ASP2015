@@ -247,7 +247,7 @@ namespace Participation_ASP.Models
                 try
                 {
 
-                    OracleCommand cmd = CreateOracleCommand(con, "SELECT * FROM Voorstelling WHERE zaal_id = :filmId");
+                    OracleCommand cmd = CreateOracleCommand(con, "SELECT * FROM Film WHERE id = :filmId");
                     cmd.Parameters.Add("filmId", filmId);
                     con.Open();
                     OracleDataReader reader = ExecuteQuery(cmd);
@@ -258,7 +258,8 @@ namespace Participation_ASP.Models
                         int duur = Convert.ToInt32(reader["Duur"]);
                         string beschrijving = reader["Beschrijving"].ToString();
                         string taalversie = reader["Taalversie"].ToString();
-                        newFilm = new Film(filmId, naam, duur, beschrijving, taalversie, DateTime.Now);
+                        DateTime releaseDate = Convert.ToDateTime(reader["ReleaseDate"]);
+                        newFilm = new Film(filmId, naam, duur, beschrijving, taalversie, releaseDate);
                     }
                     return newFilm;
                 }
