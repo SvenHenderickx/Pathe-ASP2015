@@ -26,5 +26,14 @@ namespace PatheAsp.Models
             this.Voorstellingen = new List<Voorstelling>();
             
         }
+
+        public Zaal(int id, int nummer)
+        {
+            this.Id = id;
+            this.Nummer = nummer;
+            this.Stoelen = new List<Stoel>();
+            this.Voorstellingen = new List<Voorstelling>();
+
+        }
     }
 }

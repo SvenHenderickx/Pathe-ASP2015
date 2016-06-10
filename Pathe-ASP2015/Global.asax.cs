@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using Participation_ASP.Models;
 using Pathe_ASP2015.Models;
 
 namespace Pathe_ASP2015
@@ -18,6 +19,7 @@ namespace Pathe_ASP2015
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             Handler.GetBioscopen();
+            DatabaseManager.TestConnection();
         }
     }
 }

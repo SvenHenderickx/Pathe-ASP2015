@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Participation_ASP.Models;
 using PatheAsp.Models;
 
 namespace Pathe_ASP2015.Models
@@ -12,16 +13,18 @@ namespace Pathe_ASP2015.Models
 
         public static void GetBioscopen()
         {
-            Bioscopen.Add(new Bioscoop(1, "Eindhoven", "Eindhoven", "Dorpstraat", "6096AR", true, true, true, "Dolby", "Ja", GetZalen(1)));
-            Bioscopen.Add(new Bioscoop(2, "Amersfoort", "Amersfoort", "Lindestraat", "6096AR", true, true, true, "Dolby", "Ja", GetZalen(2)));
+            //Bioscopen.Add(new Bioscoop(1, "Eindhoven", "Eindhoven", "Dorpstraat", "6096AR", true, true, true, "Dolby", "Ja", GetZalen(1)));
+            //Bioscopen.Add(new Bioscoop(2, "Amersfoort", "Amersfoort", "Lindestraat", "6096AR", true, true, true, "Dolby", "Ja", GetZalen(2)));
+            Bioscopen = DatabaseManager.GetAllBioscopen();
+            foreach (Bioscoop b in Bioscopen)
+            {
+                b.VoegZalenToe(GetZalen(b.Id));
+            }
         }
 
         public static List<Zaal> GetZalen(int biosId)
         {
-            List<Zaal> tempList = new List<Zaal>();
-            tempList.Add(new Zaal(1, 1, GetStoelen(1)));
-            tempList.Add(new Zaal(2, 2, GetStoelen(1)));
-            tempList.Add(new Zaal(3, 3, GetStoelen(1)));
+            
             return tempList;
         }
 
@@ -45,6 +48,15 @@ namespace Pathe_ASP2015.Models
             {
                 return "Nee";
             }
+        }
+
+        public static bool GetBoolFromInt(int inv)
+        {
+            if (inv == 1)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

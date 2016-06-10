@@ -35,5 +35,24 @@ namespace PatheAsp.Models
             this.Openingstijden = openingstijden;
             this.Zalen = zalen;
         }
+
+        public Bioscoop(int id, string naam, string plaats, string adres, string postCode, bool lift, bool rolstoelMogelijkheid, bool ringleiding, string geluidssysteem)
+        {
+            Id = id;
+            Naam = naam;
+            Plaats = plaats;
+            Adres = adres;
+            PostCode = postCode;
+            Lift = lift;
+            RolstoelMogelijkheid = rolstoelMogelijkheid;
+            Ringleiding = ringleiding;
+            Geluidssysteem = geluidssysteem;
+            Zalen = new List<Zaal>();
+        }
+
+        public void VoegZalenToe(List<Zaal> zalen)
+        {
+            this.Zalen = zalen;
+        }
     }
 }
