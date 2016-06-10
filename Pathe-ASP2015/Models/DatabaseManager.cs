@@ -179,5 +179,37 @@ namespace Participation_ASP.Models
                 }
             }
         }
+
+        public static List<Stoel> GetStoelenFromZaalId(int zaalId)
+        {
+            using (OracleConnection con = Connection)
+            {
+                List<Stoel> tempList = new List<Stoel>();
+                try
+                {
+
+                    OracleCommand cmd = CreateOracleCommand(con, "SELECT * FROM STOEL WHERE zaal_id = :zaalId");
+                    cmd.Parameters.Add("zaalId", zaalId);
+                    con.Open();
+                    OracleDataReader reader = ExecuteQuery(cmd);
+                    while (reader.Read())
+                    {
+                        int id = Convert.ToInt32(reader["id"]);
+                        string type = reader["Type"].ToString();
+                        int rij = Convert.ToInt32(reader["Rij"]);
+                        int nummer = Convert.ToInt32(reader["Nummer"]);
+                        int xpos = Convert.ToInt32(reader["XPos"]);
+                        int ypos = Convert.ToInt32(reader["YPos"]);
+                        string status = reader["Status"].ToString();
+                        tempList.Add(new Stoel(id, type, rij, nummer, xpos, ypos, status));
+                    }
+                    return tempList;
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
+            }
+        }
     }
 }

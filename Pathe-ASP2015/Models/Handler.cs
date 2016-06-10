@@ -24,18 +24,22 @@ namespace Pathe_ASP2015.Models
 
         public static List<Zaal> GetZalen(int biosId)
         {
-            
-            return tempList;
+            List<Zaal> tempZalen = DatabaseManager.GetZalenFromBioscoopId(biosId);
+            foreach (Zaal z in tempZalen)
+            {
+                z.VoegStoelenToe(GetStoelen(z.Id));
+            }
+            return tempZalen;
         }
 
         public static List<Stoel> GetStoelen(int zaalId)
         {
-            List<Stoel> tempList = new List<Stoel>();
-            tempList.Add(new Stoel(1, "Normaal", 1, 1, 1, 1, "vrij"));
-            tempList.Add(new Stoel(2, "Normaal", 1, 2, 1, 2, "vrij"));
-            tempList.Add(new Stoel(3, "Normaal", 2, 1, 2, 1, "vrij"));
-            tempList.Add(new Stoel(4, "Normaal", 2, 2, 2, 2, "vrij"));
-            return tempList;
+            return DatabaseManager.GetStoelenFromZaalId(zaalId);
+        }
+
+        public static List<Voorstelling> GetVoorstellingen(int zaalId)
+        {
+            
         }
 
         public static string GetStringFromBool(bool inv)

@@ -35,5 +35,10 @@ namespace PatheAsp.Models
             this.Voorstellingen = new List<Voorstelling>();
 
         }
+
+        public void VoegStoelenToe(List<Stoel> stoelen)
+        {
+            this.Stoelen = stoelen;
+        }
     }
 }
