@@ -28,6 +28,7 @@ namespace Pathe_ASP2015.Models
             foreach (Zaal z in tempZalen)
             {
                 z.VoegStoelenToe(GetStoelen(z.Id));
+                z.VoegVoorstellingenToe(GetVoorstellingen(z.Id));
             }
             return tempZalen;
         }
@@ -39,7 +40,17 @@ namespace Pathe_ASP2015.Models
 
         public static List<Voorstelling> GetVoorstellingen(int zaalId)
         {
-            
+            List<Voorstelling> voorstellingen = DatabaseManager.GetVoorstellingenFromZaalId(zaalId);
+            foreach (Voorstelling v in voorstellingen)
+            {
+                v.FilmToevoegen(GetFilmFromVoorstelling(v.FilmId));
+            }
+            return voorstellingen;
+        }
+
+        public static Film GetFilmFromVoorstelling(int filmId)
+        {
+            return DatabaseManager.GetFilmVanVoorstelling(filmId);
         }
 
         public static string GetStringFromBool(bool inv)
@@ -61,6 +72,22 @@ namespace Pathe_ASP2015.Models
                 return true;
             }
             return false;
+        }
+
+        public static List<Film> GetAllFilms()
+        {
+            List<Film> films = new List<Film>();
+            foreach (Bioscoop b in Bioscopen)
+            {
+                foreach (Zaal z in b.Zalen)
+                {
+                    foreach (Voorstelling v in z.Voorstellingen)
+                    {
+                        films.Add(v.Film);
+                    }
+                }
+            }
+            return films;
         }
     }
 }

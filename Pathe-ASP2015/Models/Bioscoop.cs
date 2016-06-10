@@ -54,5 +54,18 @@ namespace PatheAsp.Models
         {
             this.Zalen = zalen;
         }
+
+        public List<Stoel> GetAllStoelen()
+        {
+            List<Stoel> tempList = new List<Stoel>();
+            foreach (Zaal z in Zalen)
+            {
+                foreach (Stoel s in z.Stoelen)
+                {
+                    tempList.Add(s);
+                }
+            }
+            return tempList;
+        }
     }
 }

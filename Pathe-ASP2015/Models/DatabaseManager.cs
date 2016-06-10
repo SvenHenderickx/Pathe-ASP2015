@@ -211,5 +211,62 @@ namespace Participation_ASP.Models
                 }
             }
         }
+
+        public static List<Voorstelling> GetVoorstellingenFromZaalId(int zaalId)
+        {
+            using (OracleConnection con = Connection)
+            {
+                List<Voorstelling> tempList = new List<Voorstelling>();
+                try
+                {
+
+                    OracleCommand cmd = CreateOracleCommand(con, "SELECT * FROM Voorstelling WHERE zaal_id = :zaalId");
+                    cmd.Parameters.Add("zaalId", zaalId);
+                    con.Open();
+                    OracleDataReader reader = ExecuteQuery(cmd);
+                    while (reader.Read())
+                    {
+                        int id = Convert.ToInt32(reader["Id"]);
+                        string formaat = reader["Formaat"].ToString();
+                        int filmId = Convert.ToInt32(reader["Film_Id"]);
+                        tempList.Add(new Voorstelling(id, formaat, filmId));
+                    }
+                    return tempList;
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
+            }
+        }
+
+        public static Film GetFilmVanVoorstelling(int filmId)
+        {
+            using (OracleConnection con = Connection)
+            {
+                try
+                {
+
+                    OracleCommand cmd = CreateOracleCommand(con, "SELECT * FROM Voorstelling WHERE zaal_id = :filmId");
+                    cmd.Parameters.Add("filmId", filmId);
+                    con.Open();
+                    OracleDataReader reader = ExecuteQuery(cmd);
+                    Film newFilm = null;
+                    while (reader.Read())
+                    {
+                        string naam = reader["Naam"].ToString();
+                        int duur = Convert.ToInt32(reader["Duur"]);
+                        string beschrijving = reader["Beschrijving"].ToString();
+                        string taalversie = reader["Taalversie"].ToString();
+                        newFilm = new Film(filmId, naam, duur, beschrijving, taalversie, DateTime.Now);
+                    }
+                    return newFilm;
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
+            }
+        }
     }
 }

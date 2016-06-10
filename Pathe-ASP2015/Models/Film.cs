@@ -34,6 +34,16 @@ namespace PatheAsp.Models
             this.Reviews = reviews;
         }
 
+        public Film(int id, string naam, int duur, string beschrijving, string taalversie, DateTime releaseDate)
+        {
+            Id = id;
+            Naam = naam;
+            Duur = duur;
+            Beschrijving = beschrijving;
+            Taalversie = taalversie;
+            ReleaseDate = releaseDate;
+        }
+
         public Film(string naam)
         {
             this.Naam = naam;
