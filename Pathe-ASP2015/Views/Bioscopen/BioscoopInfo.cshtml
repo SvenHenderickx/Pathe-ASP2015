@@ -21,6 +21,6 @@
 <ul>
    @foreach (Voorstelling v in Model.GetAlleVoorstellingen())
    {
-       <li>@v.Film.Naam - @v.TijdEnDatum</li>
+       <li>@Html.ActionLink(@v.ToString(), @v.Id.ToString(), "Voorstellingen/VoorstellingInfo")</li>
    }
 </ul>

@@ -43,5 +43,11 @@ namespace PatheAsp.Models
         {
             this.Film = film;
         }
+
+        public string ToString()
+        {
+            return Film.Naam + " - " + TijdEnDatum.Day.ToString() + "-" +  TijdEnDatum.Month.ToString() + "-" + TijdEnDatum.Day.ToString() + " " + TijdEnDatum.Hour.ToString() + ":" +
+                   TijdEnDatum.Minute.ToString();
+        }
     }
 }

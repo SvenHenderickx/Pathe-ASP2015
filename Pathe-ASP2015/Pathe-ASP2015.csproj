@@ -206,6 +206,7 @@
     <Compile Include="Controllers\FilmsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\VoorstellingenController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -298,6 +299,7 @@
     <Content Include="Views\Bioscopen\BioscoopInfo.cshtml" />
     <Content Include="Views\Films\FilmInfo.cshtml" />
     <Content Include="Views\Acteurs\ActeurInfo.cshtml" />
+    <Content Include="Views\Voorstellingen\VoorstellingInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

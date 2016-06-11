@@ -303,35 +303,35 @@ namespace Participation_ASP.Models
             }
         }
 
-        public static Regisseur GetRegisseurFromFilmId(int filmId)
-        {
-            using (OracleConnection con = Connection)
-            {
-                Regisseur regisseur = null;
-                try
-                {
+        //public static Regisseur GetRegisseurFromFilmId(int filmId)
+        //{
+        //    using (OracleConnection con = Connection)
+        //    {
+        //        Regisseur regisseur = null;
+        //        try
+        //        {
 
-                    OracleCommand cmd = CreateOracleCommand(con, "select REGISSEUR.NAAM, REGISSEUR.ID, REGISSEUR.GEBOORTEDATUM, REGISSEUR.WOONPLAATS, REGISSEUR.FOTOURL FROM Regisseur INNER JOIN FILM ON regisseur_id = REGISSEUR.ID WHERE FILM.ID = :filmId");
-                    cmd.Parameters.Add("filmId", filmId);
-                    con.Open();
-                    OracleDataReader reader = ExecuteQuery(cmd);
-                    Film newFilm = null;
-                    while (reader.Read())
-                    {
-                        int id = Convert.ToInt32(reader["Id"]);
-                        string naam = reader["Naam"].ToString();
-                        DateTime geboorteDatum = Convert.ToDateTime(reader["GeboorteDatum"]);
-                        string woonplaats = reader["Woonplaats"].ToString();
-                        string fotoUrl = reader["FotoUrl"].ToString();
-                        regisseur = new Regisseur(id, naam, geboorteDatum, woonplaats, fotoUrl);
-                    }
-                    return tempList;
-                }
-                catch (Exception e)
-                {
-                    throw e;
-                }
-            }
-        }
+        //            OracleCommand cmd = CreateOracleCommand(con, "select REGISSEUR.NAAM, REGISSEUR.ID, REGISSEUR.GEBOORTEDATUM, REGISSEUR.WOONPLAATS, REGISSEUR.FOTOURL FROM Regisseur INNER JOIN FILM ON regisseur_id = REGISSEUR.ID WHERE FILM.ID = :filmId");
+        //            cmd.Parameters.Add("filmId", filmId);
+        //            con.Open();
+        //            OracleDataReader reader = ExecuteQuery(cmd);
+        //            Film newFilm = null;
+        //            while (reader.Read())
+        //            {
+        //                int id = Convert.ToInt32(reader["Id"]);
+        //                string naam = reader["Naam"].ToString();
+        //                DateTime geboorteDatum = Convert.ToDateTime(reader["GeboorteDatum"]);
+        //                string woonplaats = reader["Woonplaats"].ToString();
+        //                string fotoUrl = reader["FotoUrl"].ToString();
+        //                regisseur = new Regisseur(id, naam, geboorteDatum, woonplaats, fotoUrl);
+        //            }
+        //            return tempList;
+        //        }
+        //        catch (Exception e)
+        //        {
+        //            throw e;
+        //        }
+        //    }
+        //}
     }
 }

@@ -50,7 +50,14 @@ namespace Pathe_ASP2015.Models
 
         public static Film GetFilmFromVoorstelling(int filmId)
         {
-            return DatabaseManager.GetFilmVanVoorstelling(filmId);
+            Film film = DatabaseManager.GetFilmVanVoorstelling(filmId);
+            film.ActeurenToevoegen(GetActeursFromFilm(filmId));
+            return film;
+        }
+
+        public static List<Acteur> GetActeursFromFilm(int filmId)
+        {
+            return DatabaseManager.GetActeursFromFilm(filmId);
         }
 
         public static string GetStringFromBool(bool inv)
