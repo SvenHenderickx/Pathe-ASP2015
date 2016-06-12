@@ -9,14 +9,16 @@
 <h2>@Model.ToString()</h2>
 @{Prijs prijs = Session["ticketPrijs"] as Prijs;}
 <p>Prijs: @prijs.PrijsInEuro()</p>
-@foreach (Ticket t in @Model.Tickets)
+<p>Kies stoel:</p>
+@using (Html.BeginForm("SelectStoel", "Voorstellingen"))
 {
-    <p>@t.Stoel.Rij - @t.Stoel.Nummer</p>
-
+    <select id="stoel" class="form-control" size="1" name="stoel">
+        @foreach (Stoel s in @Model.GetVrijeStoelen(Handler.GetZaalFromVoorstelling(Model).Stoelen))
+        {
+            <option value="@s.Id">Rij: @s.Rij - Nummer: @s.Nummer</option>
+        }
+    </select>
+    <input type="submit" class="btn btn-warning" value="submit" />
 }
 
-@foreach (Stoel s in Handler.GetZaalFromVoorstelling(Model).Stoelen)
-{
-    <p>@s.Rij - @s.Nummer</p>
-}
 

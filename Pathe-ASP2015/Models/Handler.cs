@@ -141,5 +141,37 @@ namespace Pathe_ASP2015.Models
         {
             return DatabaseManager.GetStoelFromTicket(ticketId);
         }
+
+        public static List<Stoel> GetAllStoelen()
+        {
+            List<Stoel> temp = new List<Stoel>();
+            foreach (Bioscoop b in Bioscopen)
+            {
+                foreach (Zaal z in b.Zalen)
+                {
+                    foreach (Stoel s in z.Stoelen)
+                    {
+                        temp.Add(s);
+                    }
+                }
+            }
+            return temp;
+        }
+
+        public static List<Voorstelling> GetAllVoorstellingen()
+        {
+            List<Voorstelling> temp = new List<Voorstelling>();
+            foreach (Bioscoop b in Bioscopen)
+            {
+                foreach (Zaal z in b.Zalen)
+                {
+                    foreach (Voorstelling v in z.Voorstellingen)
+                    {
+                        temp.Add(v);
+                    }
+                }
+            }
+            return temp;
+        }
     }
 }

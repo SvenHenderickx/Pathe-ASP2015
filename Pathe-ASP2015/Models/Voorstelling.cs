@@ -51,8 +51,53 @@ namespace PatheAsp.Models
 
         public string ToString()
         {
-            return Film.Naam + " - " + TijdEnDatum.Day.ToString() + "-" +  TijdEnDatum.Month.ToString() + "-" + TijdEnDatum.Day.ToString() + " " + TijdEnDatum.Hour.ToString() + ":" +
+            return Film.Naam + " - " + TijdEnDatum.Day.ToString() + "-" +  TijdEnDatum.Month.ToString() + "-" + TijdEnDatum.Year.ToString() + " " + TijdEnDatum.Hour.ToString() + ":" +
                    TijdEnDatum.Minute.ToString();
+        }
+
+        public void AddTicket(Ticket ticket)
+        {
+            Tickets.Add(ticket);
+        }
+
+        public List<Stoel> GetVrijeStoelen(List<Stoel> stoelen)
+        {
+            List<Stoel> tempList = new List<Stoel>();
+            foreach (Ticket t in Tickets)
+            {
+                foreach (Stoel s in stoelen)
+                {
+                    if (t.Stoel.Id == s.Id)
+                    {
+
+                    }
+                    else
+                    {
+                        bool check = false;
+                        foreach (Ticket ts in Tickets)
+                        {
+                            if (s.Id == ts.Stoel.Id)
+                            {
+                                check = true;
+                            }
+                        }
+                        
+                        foreach (Stoel st in tempList)
+                        {
+                            if (st.Id == s.Id)
+                            {
+                                check = true;
+                            }
+                            
+                        }
+                        if (!check)
+                        {
+                            tempList.Add(s);
+                        }
+                    }
+                }
+            }
+            return tempList;
         }
     }
 }

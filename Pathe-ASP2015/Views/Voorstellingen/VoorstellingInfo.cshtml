@@ -13,7 +13,7 @@
     <select id="ticket" class="form-control" size="1" name="ticket">
         @foreach (var item in Handler.GetPrijzen())
         {
-            <option value="@item.Naam">@item.Naam</option>
+            <option value="@item.Naam">@item.Naam - @item.Informatie</option>
         }
     </select>
     <input type="submit" class="btn btn-warning" value="submit" />

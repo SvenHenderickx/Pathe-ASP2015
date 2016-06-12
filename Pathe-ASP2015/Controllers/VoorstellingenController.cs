@@ -64,5 +64,35 @@ namespace Pathe_ASP2015.Controllers
             Voorstelling voorstelling = Session["Voorstelling"] as Voorstelling;
             return View(voorstelling);
         }
+
+        [HttpPost]
+        public ActionResult SelectStoel(FormCollection formCollection)
+        {
+            int id = Convert.ToInt32(formCollection["stoel"]);
+            Ticket ticket = null;
+            foreach (Stoel s in Handler.GetAllStoelen())
+            {
+                if (id == s.Id)
+                {
+                    ticket = new Ticket(Ticket.Highestid, s, Session["ticketPrijs"] as Prijs);
+                }
+            }
+            Session["Ticket"] = ticket;
+            Voorstelling voorstelling = Session["Voorstelling"] as Voorstelling;
+            foreach (Voorstelling v in Handler.GetAllVoorstellingen())
+            {
+                if (v.Id == voorstelling.Id)
+                {
+                    voorstelling.AddTicket(ticket);
+                }
+            }
+
+            return RedirectToAction("TicketInfo");
+        }
+
+        public ActionResult TicketInfo()
+        {
+            return View(Session["Ticket"] as Ticket);
+        }
     }
 }
