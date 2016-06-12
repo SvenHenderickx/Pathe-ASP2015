@@ -44,6 +44,7 @@ namespace Pathe_ASP2015.Models
             foreach (Voorstelling v in voorstellingen)
             {
                 v.FilmToevoegen(GetFilmFromVoorstelling(v.FilmId));
+                v.TicketsToevoegen(GetTicketsFromVoorstelling(v.Id));
             }
             return voorstellingen;
         }
@@ -100,6 +101,45 @@ namespace Pathe_ASP2015.Models
         public static List<Prijs> GetPrijzen()
         {
             return DatabaseManager.GetPrijzen();
+        }
+
+        public static Zaal GetZaalFromVoorstelling(Voorstelling voorstelling)
+        {
+            foreach (Bioscoop b in Bioscopen)
+            {
+                foreach (Zaal z in b.Zalen)
+                {
+                    foreach (Voorstelling v in z.Voorstellingen)
+                    {
+                        if (voorstelling == v)
+                        {
+                            return z;
+                        }
+                    }
+                }
+            }
+            return null;
+        }
+
+        public static List<Ticket> GetTicketsFromVoorstelling(int id)
+        {
+            List<Ticket> tempList = DatabaseManager.GetTicketsFromVoorstelling(id);
+            foreach (Ticket t in tempList)
+            {
+                t.VoegPrijsToe(GetPrijsFromTicket(t.Id));
+                t.VoegStoelToe(GetStoelFromTicket(t.Id));
+            }
+            return tempList;
+        }
+
+        public static Prijs GetPrijsFromTicket(int ticketId)
+        {
+            return DatabaseManager.GetPrijsFromTicket(ticketId);
+        }
+
+        public static Stoel GetStoelFromTicket(int ticketId)
+        {
+            return DatabaseManager.GetStoelFromTicket(ticketId);
         }
     }
 }

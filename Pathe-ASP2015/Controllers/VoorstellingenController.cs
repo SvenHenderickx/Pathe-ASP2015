@@ -51,12 +51,18 @@ namespace Pathe_ASP2015.Controllers
             {
                 if (p.Naam == ticketNaam)
                 {
-                    
+                    prijs = p;
                 }
             }
             Session["ticketPrijs"] = prijs;
             Voorstelling voorstelling = Session["Voorstelling"] as Voorstelling;
             return RedirectToAction("StoelKiezen");
+        }
+
+        public ActionResult StoelKiezen()
+        {
+            Voorstelling voorstelling = Session["Voorstelling"] as Voorstelling;
+            return View(voorstelling);
         }
     }
 }

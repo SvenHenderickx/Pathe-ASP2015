@@ -242,6 +242,94 @@ namespace Participation_ASP.Models
             }
         }
 
+        public static List<Ticket> GetTicketsFromVoorstelling(int voorstellingId)
+        {
+            using (OracleConnection con = Connection)
+            {
+                List<Ticket> tempList = new List<Ticket>();
+                try
+                {
+
+                    OracleCommand cmd = CreateOracleCommand(con, "SELECT * FROM TICKET Where voorstelling_id = :voorstellingId");
+                    cmd.Parameters.Add("voorstellingId", voorstellingId);
+                    con.Open();
+                    OracleDataReader reader = ExecuteQuery(cmd);
+                    while (reader.Read())
+                    {
+                        int id = Convert.ToInt32(reader["Id"]);
+                        
+                        tempList.Add(new Ticket(id));
+                    }
+                    return tempList;
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
+            }
+        }
+
+        public static Prijs GetPrijsFromTicket(int ticketId)
+        {
+            using (OracleConnection con = Connection)
+            {
+                Prijs tempPrijs = null;
+                try
+                {
+
+                    OracleCommand cmd = CreateOracleCommand(con, "SELECT prijs.id, prijs.naam, prijs.prijs, prijs.informatie FROM Prijs INNER JOIN TICKET ON prijs_id = PRIJS.ID Where ticket.id = :ticketId");
+                    cmd.Parameters.Add("ticketId", ticketId);
+                    con.Open();
+                    OracleDataReader reader = ExecuteQuery(cmd);
+                    while (reader.Read())
+                    {
+                        int id = Convert.ToInt32(reader["Id"]);
+                        string naam = reader["Naam"].ToString();
+                        double prijs = Convert.ToDouble(reader["Prijs"]);
+                        string informatie = reader["Informatie"].ToString();
+                        tempPrijs = new Prijs(id, naam, Convert.ToInt32(prijs * 100), informatie);
+                    }
+                    return tempPrijs;
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
+            }
+        }
+
+        public static Stoel GetStoelFromTicket(int ticketId)
+        {
+            using (OracleConnection con = Connection)
+            {
+                Stoel tempStoel = null;
+                try
+                {
+
+                    OracleCommand cmd = CreateOracleCommand(con, "SELECT stoel.id, stoel.type, stoel.rij, stoel.nummer, stoel.xpos, stoel.ypos, stoel.status FROM stoel INNER JOIN TICKET ON stoel_id = stoel.ID Where ticket.id = :ticketId");
+                    cmd.Parameters.Add("ticketId", ticketId);
+                    con.Open();
+                    OracleDataReader reader = ExecuteQuery(cmd);
+                    while (reader.Read())
+                    {
+                        int id = Convert.ToInt32(reader["Id"]);
+                        string type = Convert.ToString(reader["Type"]);
+                        int rij = Convert.ToInt32(reader["Rij"]);
+                        int nummer = Convert.ToInt32(reader["Nummer"]);
+                        int xpos = Convert.ToInt32(reader["Xpos"]);
+                        int ypos = Convert.ToInt32(reader["Ypos"]);
+                        string status = Convert.ToString(reader["Status"]);
+                        tempStoel = new Stoel(id, type, rij, nummer, xpos, ypos, status);
+                    }
+                    return tempStoel;
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
+            }
+        }
+
         public static Film GetFilmVanVoorstelling(int filmId)
         {
             using (OracleConnection con = Connection)
@@ -361,5 +449,7 @@ namespace Participation_ASP.Models
         //        }
         //    }
         //}
+
+
     }
 }

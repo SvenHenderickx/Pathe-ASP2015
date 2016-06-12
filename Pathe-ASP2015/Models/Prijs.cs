@@ -14,5 +14,10 @@
             PrijsInCenten = prijsInCenten;
             Informatie = informatie;
         }
+
+        public double PrijsInEuro()
+        {
+            return PrijsInCenten/100;
+        }
     }
 }

@@ -1,8 +1,22 @@
-﻿@model PatheAsp.Models.Voorstelling
+﻿@using PatheAsp.Models
+@using Pathe_ASP2015.Models
+@model PatheAsp.Models.Voorstelling
 @{
     ViewBag.Title = "StoelKiezen";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>@Model.ToString()</h2>
+@{Prijs prijs = Session["ticketPrijs"] as Prijs;}
+<p>Prijs: @prijs.PrijsInEuro()</p>
+@foreach (Ticket t in @Model.Tickets)
+{
+    <p>@t.Stoel.Rij - @t.Stoel.Nummer</p>
+
+}
+
+@foreach (Stoel s in Handler.GetZaalFromVoorstelling(Model).Stoelen)
+{
+    <p>@s.Rij - @s.Nummer</p>
+}
 

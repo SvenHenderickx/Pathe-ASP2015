@@ -44,6 +44,11 @@ namespace PatheAsp.Models
             this.Film = film;
         }
 
+        public void TicketsToevoegen(List<Ticket> tickets)
+        {
+            this.Tickets = tickets;
+        }
+
         public string ToString()
         {
             return Film.Naam + " - " + TijdEnDatum.Day.ToString() + "-" +  TijdEnDatum.Month.ToString() + "-" + TijdEnDatum.Day.ToString() + " " + TijdEnDatum.Hour.ToString() + ":" +
