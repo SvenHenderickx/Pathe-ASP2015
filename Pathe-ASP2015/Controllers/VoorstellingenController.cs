@@ -86,7 +86,7 @@ namespace Pathe_ASP2015.Controllers
                     voorstelling.AddTicket(ticket);
                 }
             }
-
+            Handler.AddTicketToVoorstelling(ticket, voorstelling);
             return RedirectToAction("TicketInfo");
         }
 

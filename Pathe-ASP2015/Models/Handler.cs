@@ -173,5 +173,10 @@ namespace Pathe_ASP2015.Models
             }
             return temp;
         }
+
+        public static bool AddTicketToVoorstelling(Ticket ticket, Voorstelling voorstelling)
+        {
+            return DatabaseManager.AddTicket(ticket, voorstelling);
+        }
     }
 }

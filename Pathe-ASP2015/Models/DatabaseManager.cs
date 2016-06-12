@@ -450,6 +450,26 @@ namespace Participation_ASP.Models
         //    }
         //}
 
+        internal static bool AddTicket(Ticket ticket, Voorstelling voorstelling)
+        {
+            using (OracleConnection con = Connection)
+            {
+                try
+                {
+                    OracleCommand command = CreateOracleCommand(con, "INSERT INTO TICKET VALUES(:id, :voorstellingId, :stoelId, :prijsId");
+                    command.Parameters.Add(":id", ticket.Id);
+                    command.Parameters.Add(":voorstellingId", voorstelling.Id);
+                    command.Parameters.Add(":stoelId", ticket.Stoel.Id);
+                    command.Parameters.Add(":prijsId", ticket.Prijs.Id);
+                    return ExecuteNonQuery(command);
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+            
+        }
 
     }
 }
