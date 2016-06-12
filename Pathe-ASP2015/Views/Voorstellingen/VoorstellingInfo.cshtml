@@ -1,9 +1,21 @@
-﻿@model PatheAsp.Models.Voorstelling
+﻿@using PatheAsp.Models
+@using Pathe_ASP2015.Models
+@model PatheAsp.Models.Voorstelling
 @{
     ViewBag.Title = "VoorstellingInfo";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>@Model.ToString()</h2>
-<p></p>
+<p>@Model.Film.Beschrijving</p>
+@using (Html.BeginForm("SelectTicket", "Voorstellingen"))
+{
+    <select id="ticket" class="form-control" size="1" name="ticket">
+        @foreach (var item in Handler.GetPrijzen())
+        {
+            <option value="@item.Naam">@item.Naam</option>
+        }
+    </select>
+    <input type="submit" value="submit" />
+}
 

@@ -96,5 +96,10 @@ namespace Pathe_ASP2015.Models
             }
             return films;
         }
+
+        public static List<Prijs> GetPrijzen()
+        {
+            return DatabaseManager.GetPrijzen();
+        }
     }
 }

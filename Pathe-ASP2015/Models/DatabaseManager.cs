@@ -303,6 +303,34 @@ namespace Participation_ASP.Models
             }
         }
 
+        public static List<Prijs> GetPrijzen()
+        {
+            using (OracleConnection con = Connection)
+            {
+                List<Prijs> tempList = new List<Prijs>();
+                try
+                {
+
+                    OracleCommand cmd = CreateOracleCommand(con, "select * FROM Prijs");
+                    con.Open();
+                    OracleDataReader reader = ExecuteQuery(cmd);
+                    while (reader.Read())
+                    {
+                        int id = Convert.ToInt32(reader["Id"]);
+                        string naam = reader["Naam"].ToString();
+                        double prijs = Convert.ToDouble(reader["Prijs"]);
+                        string informatie = reader["Informatie"].ToString();
+                        tempList.Add(new Prijs(id, naam, Convert.ToInt32(prijs * 100), informatie));
+                    }
+                    return tempList;
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
+            }
+        }
+
         //public static Regisseur GetRegisseurFromFilmId(int filmId)
         //{
         //    using (OracleConnection con = Connection)

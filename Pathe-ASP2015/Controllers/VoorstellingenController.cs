@@ -19,6 +19,7 @@ namespace Pathe_ASP2015.Controllers
         [Route("Voorstellingen/VoorstellingInfo/{id}")]
         public ActionResult VoorstellingInfo(int id)
         {
+            Handler.GetPrijzen();
             Voorstelling temp = null;
             foreach (Bioscoop b in Handler.Bioscopen)
             {
@@ -35,9 +36,27 @@ namespace Pathe_ASP2015.Controllers
             }
             if (temp != null)
             {
+                Session["Voorstelling"] = temp;
                 return View(temp);
             }
             return HttpNotFound();
+        }
+
+        [HttpPost]
+        public ActionResult SelectTicket(FormCollection formCollection)
+        {
+            string ticketNaam = formCollection["ticket"];
+            Prijs prijs = null;
+            foreach (Prijs p in Handler.GetPrijzen())
+            {
+                if (p.Naam == ticketNaam)
+                {
+                    
+                }
+            }
+            Session["ticketPrijs"] = prijs;
+            Voorstelling voorstelling = Session["Voorstelling"] as Voorstelling;
+            return RedirectToAction("StoelKiezen");
         }
     }
 }
